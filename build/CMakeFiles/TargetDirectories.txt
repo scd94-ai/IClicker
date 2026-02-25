@@ -1,3 +1,0 @@
-/Users/mdyer/Documents/VScode_projects/IClicker/build/CMakeFiles/hello.dir
-/Users/mdyer/Documents/VScode_projects/IClicker/build/CMakeFiles/edit_cache.dir
-/Users/mdyer/Documents/VScode_projects/IClicker/build/CMakeFiles/rebuild_cache.dir
