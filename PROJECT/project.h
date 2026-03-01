@@ -1,4 +1,18 @@
-#pragma once
-#include <stddef.h>
+#ifndef PROJECT_H_
+#define PROJECT_H_
 
-int sendTextUart(char const* str, size_t length);
+#include <stdint.h>
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void Blink_Test(void);
+
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* INC_CPP_CUSTOM_H_ */

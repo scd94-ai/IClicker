@@ -18,7 +18,10 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "project.h"
+#include <stdint.h>
+#include <stdio.h>
+#include <stdbool.h>
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -106,8 +109,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
+    HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_8);
+    HAL_Delay(500);    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
