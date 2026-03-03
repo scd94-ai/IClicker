@@ -9,8 +9,9 @@ extern "C" {
 #endif
 
 void Blink_Test(void);
-
-
+void Csn_Low(void);
+void Csn_High(void);
+void UART_Display(char*, int);
 #ifdef __cplusplus
 }
 #endif
