@@ -9,6 +9,7 @@ extern "C" {
 #endif
 
 void Blink_Test(void);
+void uS_Delay(int);
 void Csn_Low(void);
 void Csn_High(void);
 void CC2500_Reset();

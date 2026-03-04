@@ -72,7 +72,7 @@ uint8_t CC2500_ReadReg(uint8_t addr, bool display_status){
 
     return rx[1];
 }
-
+    
 
 
 

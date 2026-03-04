@@ -114,13 +114,31 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint8_t tx = 0xAA;
+  uint8_t rx;
+  //void UART_Display(char* msg, int size){
 
   while (1)
   {
+    /*
+    TESTING CODE FOR READ REG FUNCTION
     uint8_t reg_val = CC2500_ReadReg(addr, display_status);
     int size_of_message = snprintf(msg,sizeof(msg),"Reg 0x02: 0x%X \n\r",reg_val);
     UART_Display(msg, size_of_message);
     HAL_Delay(1000);
+    */
+    Csn_Low();
+    int uS = 10;
+    uS_Delay(uS);
+    Csn_High();
+    uS_Delay(uS);
+    Csn_Low();
+    HAL_SPI_TransmitReceive(&hspi1,&tx,&rx,1,HAL_MAX_DELAY);
+    Csn_High();
+    int size_of_message = snprintf(msg,sizeof(msg),"Tx: 0x80 Rx: 0x%X \n\r",rx);
+    UART_Display(msg,size_of_message);
+    HAL_Delay(1000);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -195,7 +213,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -341,7 +359,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, SPI1_CSN_Pin|GPIO_PIN_8, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(SPI1_CSN_GPIO_Port, SPI1_CSN_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : SPI1_CSN_Pin PA8 */
   GPIO_InitStruct.Pin = SPI1_CSN_Pin|GPIO_PIN_8;
