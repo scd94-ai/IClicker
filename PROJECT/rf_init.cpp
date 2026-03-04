@@ -23,9 +23,9 @@ void UART_Display(char* msg, int size){
 }
 
 void uS_Delay(int uS){
-    HTIM
+    TIM2->CNT = 0;
+    while(TIM2->CNT < uS); 
 }
-
 // ADD A TMER UTILITY FUNCTION HERE uS 
 /* ---------------------  UTILITY FUNCTIONS END  --------------------- */
 
