@@ -21,7 +21,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "project.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -102,13 +105,22 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_Base_Start(&htim2);
+  uint8_t addr = 0x02;
+  bool display_status = true;
+  char msg[64];
+  CC2500_Reset();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   while (1)
   {
+    uint8_t reg_val = CC2500_ReadReg(addr, display_status);
+    int size_of_message = snprintf(msg,sizeof(msg),"Reg 0x02: 0x%X \n\r",reg_val);
+    UART_Display(msg, size_of_message);
+    HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -329,7 +341,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, SPI1_CSN_Pin|GPIO_PIN_8, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, SPI1_CSN_Pin|GPIO_PIN_8, GPIO_PIN_SET);
 
   /*Configure GPIO pins : SPI1_CSN_Pin PA8 */
   GPIO_InitStruct.Pin = SPI1_CSN_Pin|GPIO_PIN_8;

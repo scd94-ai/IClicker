@@ -11,7 +11,9 @@ extern "C" {
 void Blink_Test(void);
 void Csn_Low(void);
 void Csn_High(void);
+void CC2500_Reset();
 void UART_Display(char*, int);
+uint8_t CC2500_ReadReg(uint8_t, bool);
 #ifdef __cplusplus
 }
 #endif
