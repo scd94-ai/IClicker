@@ -106,38 +106,31 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start(&htim2);
-  uint8_t addr = 0x02;
+  uint8_t addr = 0x30;
   bool display_status = true;
   char msg[64];
-  CC2500_Reset();
+  // CC2500_Reset();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t tx = 0xAA;
+  uint8_t tx = 0x34;
   uint8_t rx;
   //void UART_Display(char* msg, int size){
 
   while (1)
   {
-    /*
-    TESTING CODE FOR READ REG FUNCTION
-    uint8_t reg_val = CC2500_ReadReg(addr, display_status);
-    int size_of_message = snprintf(msg,sizeof(msg),"Reg 0x02: 0x%X \n\r",reg_val);
-    UART_Display(msg, size_of_message);
-    HAL_Delay(1000);
-    */
-    Csn_Low();
-    int uS = 10;
-    uS_Delay(uS);
-    Csn_High();
-    uS_Delay(uS);
+    
     Csn_Low();
     HAL_SPI_TransmitReceive(&hspi1,&tx,&rx,1,HAL_MAX_DELAY);
     Csn_High();
-    int size_of_message = snprintf(msg,sizeof(msg),"Tx: 0x80 Rx: 0x%X \n\r",rx);
-    UART_Display(msg,size_of_message);
-    HAL_Delay(1000);
+    // uint8_t reg_val = CC2500_ReadReg(addr, display_status);
+    // int size_of_message = snprintf(msg,sizeof(msg),"Reg 0x30: 0x%X \n\r",reg_val);
+    // UART_Display(msg, size_of_message);
+    // HAL_Delay(1000);
+    
+
+
 
     /* USER CODE END WHILE */
 
