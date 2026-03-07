@@ -121,13 +121,11 @@ int main(void)
   while (1)
   {
     
-    Csn_Low();
-    HAL_SPI_TransmitReceive(&hspi1,&tx,&rx,1,HAL_MAX_DELAY);
-    Csn_High();
-    // uint8_t reg_val = CC2500_ReadReg(addr, display_status);
-    // int size_of_message = snprintf(msg,sizeof(msg),"Reg 0x30: 0x%X \n\r",reg_val);
-    // UART_Display(msg, size_of_message);
-    // HAL_Delay(1000);
+    Blink_Test();
+    uint8_t reg_val = CC2500_ReadReg(addr, display_status);
+    int size_of_message = snprintf(msg,sizeof(msg),"Reg 0x30: 0x%X \n\r",reg_val);
+    UART_Display(msg, size_of_message);
+    HAL_Delay(1000);
     
 
 
